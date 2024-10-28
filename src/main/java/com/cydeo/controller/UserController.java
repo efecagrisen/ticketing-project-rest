@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping
-    @RolesAllowed({"Manager","Admin"})
+    @RolesAllowed({"Manager","Admin","ADMIN","ROLE_ADMIN"})
     public ResponseEntity<ResponseWrapper> getUsers(){
         List<UserDTO> userDTOList = userService.listAllUsers();
         return ResponseEntity.ok(new ResponseWrapper("Users are retrieved successfully",userDTOList, HttpStatus.OK));
@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"Admin","ROLE_ADMIN"})
     public ResponseEntity<ResponseWrapper> createUser(@RequestBody UserDTO userDTO){
         userService.save(userDTO);
         return ResponseEntity
